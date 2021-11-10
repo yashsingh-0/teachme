@@ -1,3 +1,7 @@
+<?php
+include './includes/session.inc.php';
+include './includes/connection.inc.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,12 +63,23 @@
                     Dimension of reality that makes change possible and understandable. An indefinite and homogeneous environment in which natural events and human existence take place.
                 </p>
                 <div class="flex mt-8">
-                    <a href="signup.php" class="uppercase py-2 px-4 rounded-lg bg-red-500 border-2 border-transparent text-white text-md mr-4 hover:bg-red-400">
+                <?php 
+                if (!isset($_SESSION['email'])) {
+                  echo "<a href='signup.php' class='uppercase py-2 px-4 rounded-lg bg-red-500 border-2 border-transparent text-white text-md mr-4 hover:bg-red-400'>
                         Sign Up
                     </a>
-                    <a href="login.php" class="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-red-500 text-red-500 dark:text-white hover:bg-red-500 hover:text-white text-md">
+                    <a href='login.php' class='uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-red-500 text-red-500 dark:text-white hover:bg-red-500 hover:text-white text-md'>
                         Log In
+                    </a>";
+                } else {
+                   echo "<a href='home.php' class='uppercase py-2 px-4 rounded-lg bg-red-500 border-2 border-transparent text-white text-md mr-4 hover:bg-red-400'>
+                        Sign Up
                     </a>
+                    <a href='home.php' class='uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-red-500 text-red-500 dark:text-white hover:bg-red-500 hover:text-white text-md'>
+                        Log In
+                    </a>";
+                }
+                ?>
                 </div>
             </div>
             <div class="hidden sm:block sm:w-1/3 lg:w-3/5 relative">

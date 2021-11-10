@@ -34,18 +34,21 @@ if (!isset($_SESSION['email'])) {
                 <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
                 <div class="flex-1 md:flex md:items-center md:justify-between">
                     <div class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8">
-                        <a href="#" class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-red-500 py-2 px-6 flex">Join Slack</a>
+                        <a href="#" class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-red-500 py-2 px-6 flex">Connections</a>
                         <a href="#" class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-red-500 py-2 px-6 flex">Browse Topics</a>
                         <a href="#" class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-red-500 py-2 px-6 flex">Random Item</a>
                     </div>
                     <div class="relative mt-4 lg:mt-0 lg:mx-4">
+                    <form action="./includes/search.inc.php" method="POST">
+                        <button type="submit">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                             <svg class="w-4 h-4 text-gray-600 dark:text-gray-300" viewBox="0 0 24 24" fill="none">
                                 <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </span>
-
-                        <input type="text" class="w-full py-1 pl-10 pr-4 text-gray-700 placeholder-gray-600 bg-white border-b border-gray-600 dark:placeholder-gray-300 dark:focus:border-gray-300 lg:w-56 lg:border-transparent dark:bg-gray-800 dark:text-gray-300 focus:outline-none focus:border-gray-600" placeholder="Search">
+                        </button>
+                        <input type="text" name="searchstring" class="w-full py-1 pl-10 pr-4 text-gray-700 placeholder-gray-600 bg-white border-b border-gray-600 dark:placeholder-gray-300 dark:focus:border-gray-300 lg:w-56 lg:border-transparent dark:bg-gray-800 dark:text-gray-300 focus:outline-none focus:border-gray-600" placeholder="Search">
+                       </form> 
                     </div>
                     <div class="flex items-center mt-4 md:mt-0">
                         <button class="hidden mx-4 text-gray-600 md:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none" aria-label="show notifications">

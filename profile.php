@@ -37,9 +37,9 @@ if (!isset($_SESSION['email'])) {
                 <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
                 <div class="flex-1 md:flex md:items-center md:justify-between">
                     <div class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8">
-                        <a href="#" class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-red-500 py-2 px-6 flex">Join Slack</a>
+                        <a href="#" class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-red-500 py-2 px-6 flex">Connections</a>
                         <a href="#" class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-red-500 py-2 px-6 flex">Browse Topics</a>
-                        <a href="#" class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-red-500 py-2 px-6 flex">Random Item</a>
+                        <a href="#" class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-red-500 py-2 px-6 flex">Random Items</a>
                     </div>
                     <div class="relative mt-4 lg:mt-0 lg:mx-4">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
