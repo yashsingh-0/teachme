@@ -102,10 +102,10 @@ if (isset($_GET['query']) && isset($_GET['results'])) {
 			<thead>
 				<tr class='text-left bg-gray-300 border-b border-grey uppercase'>
 			        <th class='px-2 py-6'></th>
-			        <th class='text-sm text-gray-700'>Name</th>
-			        <th class='hidden md:table-cell  text-sm text-gray-700'>Mobile</th>
-			        <th class='hidden md:table-cell text-sm text-gray-700'>Email</th>
-			        <th></th>
+			        <th class='text-sm text-gray-700'>Mobile</th>
+			        <th class='hidden md:table-cell  text-sm text-gray-700'>Mail</th>
+			        <th class='hidden md:table-cell text-sm text-gray-700'>FOLLOW</th>
+			        </th>
 		      	</tr>
 			</thead>
     <?php 
@@ -123,28 +123,22 @@ if (isset($_GET['query']) && isset($_GET['results'])) {
 					        />
 			        	</span>
 			        	<span class='py-3 w-40'>
-			        		 <p class='text-gray-800 text-sm'>Bernard Owiredu</p>
+			        		 <p class='text-gray-800 text-sm'><a href=profile.php?email=$array[email]&name=$array[name]>$array[name]</a></p>
 			        		 <p class='md:hidden text-xs text-gray-600 font-medium'>244224317</p>
-			          		 <p class='hidden md:table-cell text-xs text-gray-500 font-medium'>Manager</p>
+			          		 <p class='hidden md:table-cell text-xs text-gray-500 font-medium'>$array[occupation]</p>
 			        	</span>
 			        </td>
 			        <td class='hidden md:table-cell'>
 			          <p class='text-sm text-gray-800 font-medium'>244224317</p>
-			          <p class='text-xs text-gray-500 font-medium'>bernardkissi18@gmail.com</p>
+			          <p class='text-xs text-gray-500 font-medium'>$array[email]</p>
 			        </td>
 			        <td class='hidden md:table-cell'>
-			          <p class='text-sm text-gray-700 font-medium'>Bernardkissi18@gmail.com</p>
+			          <p class='text-sm text-gray-700 font-medium'>$array[email]</p>
 			        </td>
 			        <td>
-			          <svg
-			            class='mr-3 md:mr-1 h-12 w-6 fill-current text-grey-dark'
-			            xmlns='http://www.w3.org/2000/svg'
-			            viewBox='0 0 20 20'
-			          >
-			            <path
-			              d='M4 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z'
-			            />
-			          </svg>
+			          <button class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full'>
+  						Follow
+					</button>
 			        </td>
 		      	</tr>	
 	";
