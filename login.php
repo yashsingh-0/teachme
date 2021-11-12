@@ -201,11 +201,32 @@ if (isset($_SESSION['email'])) {
 
                 <span class="w-5/6 px-4 py-3 font-bold text-center">Sign in with Google</span>
             </a>
-
+                 <?php 
+  if (isset($_GET['signup'])) {
+    if ($_GET['signup'] == "success") {
+      echo "
+    <div class='flex w-full mt-2 max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800'>
+        <div class='flex items-center justify-center w-12 bg-green-500'>
+            <svg class='w-6 h-6 text-white fill-current' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z'/>
+            </svg>
+        </div>
+        
+        <div class='px-4 py-2 -mx-3'>
+            <div class='mx-3'>
+                <span class='font-semibold text-green-500 dark:text-green-400'>success</span>
+                <p class='text-sm text-gray-600 dark:text-gray-200'>Login to see your account</p>
+            </div>
+        </div>
+    </div>";
+    }
+  }
+?> 
             <div class="flex items-center justify-between mt-4">
                 <span class="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
+               
 
-                <a href="#" class="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline">or login with email</a>
+                <p class="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline">or login with email</p>
 
                 <span class="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
             </div>

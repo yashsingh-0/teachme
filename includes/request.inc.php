@@ -35,6 +35,7 @@ if (isset($_POST['maths']) || isset($_POST['physics']) || isset($_POST['chemistr
 			header("location: ../home.php?email=".$_SESSION['email']."&reqSuc=biologyup");
 			exit();	
 	}
+	}
 	else {
 		if (isset($_POST['maths'])) {
 			$maths_req++;
@@ -65,7 +66,6 @@ if (isset($_POST['maths']) || isset($_POST['physics']) || isset($_POST['chemistr
 			exit();	
 		}
 	}	
-}
 }
 else {
 	header("location: ../home.php?email=".$_SESSION['email']);
