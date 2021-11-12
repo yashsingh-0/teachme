@@ -1,9 +1,20 @@
 <?php
 include './includes/session.inc.php';
 include './includes/connection.inc.php';
-if (!isset($_SESSION['email'])) {
-    header("Location: ./login.php");
+$conn = dbcon();
+if (isset($_SESSION['email'])) {
+    $sql = "SELECT `email` FROM `user_info` WHERE `email` = '$_SESSION[email]'";
+    $sqlr = mysqli_query($conn,$sql);
+    $rows = mysqli_num_rows($sqlr);
+    if ($rows <= 0) {
+        header("Location: ./user-login.php");
+        exit();
+    }
 }
+else {
+  header("Location: ./user-login.php");
+  exit();
+}    
 ?>
 <!DOCTYPE html>
 <html>
@@ -91,7 +102,7 @@ if (!isset($_SESSION['email'])) {
     </nav>
 
 <!--main content-->
-
+<form method="POST" action="./includes/request.inc.php">
 <section class="bg-gray-100 dark:bg-gray-900 lg:py-12 lg:flex lg:justify-center">
         <div class="bg-white dark:bg-gray-800 lg:mx-8 lg:flex lg:max-w-5xl lg:shadow-lg lg:rounded-lg">
             <div class="lg:w-1/2">
@@ -99,11 +110,35 @@ if (!isset($_SESSION['email'])) {
             </div>
 
             <div class="max-w-xl px-6 py-12 lg:max-w-5xl lg:w-1/2">
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">Build Your New <span class="text-red-600 dark:text-red-400">Idea</span></h2>
-                <p class="mt-4 text-gray-600 dark:text-gray-400">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem modi reprehenderit vitae exercitationem aliquid dolores ullam temporibus enim expedita aperiam mollitia iure consectetur dicta tenetur, porro consequuntur saepe accusantium consequatur.</p>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">Sharpen Your <span class="text-red-600 dark:text-red-400">Maths</span></h2>
+                <p class="mt-4 text-gray-600 dark:text-gray-400">Mohit tyagi is one of the best because he is giving the full content of jee mains and advance in a proper way. dolores ullam temporibus enim expedita aperiam mollitia iure consectetur dicta tenetur, porro consequuntur saepe accusantium consequatur.</p>
                 
                 <div class="mt-8">
-                    <a href="#" class="px-5 py-2 font-semibold text-gray-100 transition-colors duration-200 transform bg-gray-900 rounded-md hover:bg-gray-700">Start Now</a>
+                    <button type="submit" name="maths" class="px-5 py-2 font-semibold text-gray-100 transition-colors duration-200 transform bg-gray-900 rounded-md hover:bg-gray-700">Raise a Request</button>
+                    <?php
+                    if (isset($_GET['reqSuc'])) {
+                        if ($_GET['reqSuc'] == "mathsup" || $_GET['reqSuc'] == "maths") {
+                            echo "
+    <div class='flex w-full max-w-sm mt-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800'>
+        <div class='flex items-center justify-center w-12 bg-green-500'>
+            <svg class='w-6 h-6 text-white fill-current' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z'/>
+            </svg>
+        </div>
+        
+        <div class='px-4 py-2 -mx-3'>
+            <div class='mx-3'>
+                <span class='font-semibold text-green-500 dark:text-green-400'>Success</span>
+                <p class='text-sm text-gray-600 dark:text-gray-200'>Your Request Has been sent!</p>
+            </div>
+        </div>
+    </div>
+        ";
+                        }
+                    }
+
+
+                    ?>
                 </div>
             </div>
         </div>
@@ -116,11 +151,35 @@ if (!isset($_SESSION['email'])) {
             </div>
 
             <div class="max-w-xl px-6 py-12 lg:max-w-5xl lg:w-1/2">
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">Build Your New <span class="text-red-600 dark:text-red-400">Idea</span></h2>
-                <p class="mt-4 text-gray-600 dark:text-gray-400">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem modi reprehenderit vitae exercitationem aliquid dolores ullam temporibus enim expedita aperiam mollitia iure consectetur dicta tenetur, porro consequuntur saepe accusantium consequatur.</p>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">Imagine the world: <span class="text-red-600 dark:text-red-400">Physics</span></h2>
+                <p class="mt-4 text-gray-600 dark:text-gray-400">Physics is the natural science that studies matter,[a] its fundamental constituents, its motion and behavior through space and time, and the related entities of energy and force.[2] Physics is one of the most fundamental scientific disciplines, and its main goal is to understand how the universe behaves.</p>
                 
                 <div class="mt-8">
-                    <a href="#" class="px-5 py-2 font-semibold text-gray-100 transition-colors duration-200 transform bg-gray-900 rounded-md hover:bg-gray-700">Start Now</a>
+                    <button type="submit" name="physics" class="px-5 py-2 font-semibold text-gray-100 transition-colors duration-200 transform bg-gray-900 rounded-md hover:bg-gray-700">Raise a Request</button>
+                    <?php
+                    if (isset($_GET['reqSuc'])) {
+                        if ($_GET['reqSuc'] == "physicsup" || $_GET['reqSuc'] == "physics") {
+                            echo "
+    <div class='flex w-full max-w-sm mt-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800'>
+        <div class='flex items-center justify-center w-12 bg-green-500'>
+            <svg class='w-6 h-6 text-white fill-current' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z'/>
+            </svg>
+        </div>
+        
+        <div class='px-4 py-2 -mx-3'>
+            <div class='mx-3'>
+                <span class='font-semibold text-green-500 dark:text-green-400'>Success</span>
+                <p class='text-sm text-gray-600 dark:text-gray-200'>Your Request Has been sent!</p>
+            </div>
+        </div>
+    </div>
+        ";
+                        }
+                    }
+
+
+                    ?>
                 </div>
             </div>
         </div>
@@ -133,11 +192,35 @@ if (!isset($_SESSION['email'])) {
             </div>
 
             <div class="max-w-xl px-6 py-12 lg:max-w-5xl lg:w-1/2">
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">Build Your New <span class="text-red-600 dark:text-red-400">Idea</span></h2>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">Wanna Know Why Matter 'Matters'? <span class="text-red-600 dark:text-red-400">Chemistry</span></h2>
                 <p class="mt-4 text-gray-600 dark:text-gray-400">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem modi reprehenderit vitae exercitationem aliquid dolores ullam temporibus enim expedita aperiam mollitia iure consectetur dicta tenetur, porro consequuntur saepe accusantium consequatur.</p>
                 
                 <div class="mt-8">
-                    <a href="#" class="px-5 py-2 font-semibold text-gray-100 transition-colors duration-200 transform bg-gray-900 rounded-md hover:bg-gray-700">Start Now</a>
+                    <button type="submit" name="chemistry" class="px-5 py-2 font-semibold text-gray-100 transition-colors duration-200 transform bg-gray-900 rounded-md hover:bg-gray-700">Raise a Request</button>
+                    <?php
+                    if (isset($_GET['reqSuc'])) {
+                        if ($_GET['reqSuc'] == "chemistryup" || $_GET['reqSuc'] == "chemistry") {
+                            echo "
+    <div class='flex w-full max-w-sm mt-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800'>
+        <div class='flex items-center justify-center w-12 bg-green-500'>
+            <svg class='w-6 h-6 text-white fill-current' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z'/>
+            </svg>
+        </div>
+        
+        <div class='px-4 py-2 -mx-3'>
+            <div class='mx-3'>
+                <span class='font-semibold text-green-500 dark:text-green-400'>Success</span>
+                <p class='text-sm text-gray-600 dark:text-gray-200'>Your Request Has been sent!</p>
+            </div>
+        </div>
+    </div>
+        ";
+                        }
+                    }
+
+
+                    ?>
                 </div>
             </div>
         </div>
@@ -150,11 +233,35 @@ if (!isset($_SESSION['email'])) {
             </div>
 
             <div class="max-w-xl px-6 py-12 lg:max-w-5xl lg:w-1/2">
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">Build Your New <span class="text-red-600 dark:text-red-400">Idea</span></h2>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">The Most Complex God's Creation <span class="text-red-600 dark:text-red-400">Biology</span></h2>
                 <p class="mt-4 text-gray-600 dark:text-gray-400">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem modi reprehenderit vitae exercitationem aliquid dolores ullam temporibus enim expedita aperiam mollitia iure consectetur dicta tenetur, porro consequuntur saepe accusantium consequatur.</p>
                 
                 <div class="mt-8">
-                    <a href="#" class="px-5 py-2 font-semibold text-gray-100 transition-colors duration-200 transform bg-gray-900 rounded-md hover:bg-gray-700">Start Now</a>
+                    <button type="submit" name="biology" class="px-5 py-2 font-semibold text-gray-100 transition-colors duration-200 transform bg-gray-900 rounded-md hover:bg-gray-700">Raise a Request</button>
+                    <?php
+                    if (isset($_GET['reqSuc'])) {
+                        if ($_GET['reqSuc'] == "biologyup" || $_GET['reqSuc'] == "biology") {
+                            echo "
+    <div class='flex w-full max-w-sm mt-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800'>
+        <div class='flex items-center justify-center w-12 bg-green-500'>
+            <svg class='w-6 h-6 text-white fill-current' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z'/>
+            </svg>
+        </div>
+        
+        <div class='px-4 py-2 -mx-3'>
+            <div class='mx-3'>
+                <span class='font-semibold text-green-500 dark:text-green-400'>Success</span>
+                <p class='text-sm text-gray-600 dark:text-gray-200'>Your Request Has been sent!</p>
+            </div>
+        </div>
+    </div>
+        ";
+                        }
+                    }
+
+
+                    ?>
                 </div>
             </div>
         </div>

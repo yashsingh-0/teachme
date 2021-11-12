@@ -1,9 +1,20 @@
 <?php
-include './includes/session.inc.php';
-include './includes/connection.inc.php';
-if (!isset($_SESSION['email'])) {
-	header("Location: ./login.php");
+include '../includes/session.inc.php';
+include '../includes/connection.inc.php';
+$conn = dbcon();
+if (isset($_SESSION['email'])) {
+    $sql = "SELECT `email` FROM `teachers_info` WHERE `email` = '$_SESSION[email]'";
+    $sqlr = mysqli_query($conn,$sql);
+    $rows = mysqli_num_rows($sqlr);
+    if ($rows <= 0) {
+        header("Location: ./admin-teachers-login.php");
+        exit();
+    }
 }
+else {
+  header("Location: ./admin-teachers-login.php");
+  exit();
+}    
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +23,7 @@ if (!isset($_SESSION['email'])) {
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?php echo $_GET['name'];?></title>
+	<title><?php echo "Welcome ".$_GET['name'];?></title>
 </head>
 <body class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover" style="background-image:url('https://source.unsplash.com/1L71sPT5XKc');">
 
@@ -21,7 +32,7 @@ if (!isset($_SESSION['email'])) {
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex items-center justify-between">
                     <div class="text-xl font-semibold text-gray-700">
-                        <a class="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300" href="./index.php">TEACH.ME</a>
+                        <a class="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300" href="../index.php">TEACH.ME</a>
                     </div>
 
                     <!-- Mobile menu button -->
@@ -61,14 +72,14 @@ if (!isset($_SESSION['email'])) {
                             <div class="flex items-center px-4 -mx-2">
                         <?php
                         if (isset($_SESSION['email'])) {
-                        echo "<a href='./profile.php?email=$_SESSION[email]&name=$_SESSION[fullname]'>
+                        echo "<a href='../profile.php?email=$_SESSION[email]&name=$_SESSION[fullname]'>
                         <img class='object-cover mx-2 rounded-full h-9 w-9' src='https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' alt='avatar'/></a>";
                         }
                         ?>
                             </div>
                         <?php
                         if (isset($_SESSION['email'])) {
-                            echo "<a href='./profile.php?email=$_SESSION[email]&name=$_SESSION[fullname]'>
+                            echo "<a href='../profile.php?email=$_SESSION[email]&name=$_SESSION[fullname]'>
                             <h3 class='mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden'>John Doe</h3></a>
                         </button>";    
                             }    
@@ -76,7 +87,7 @@ if (!isset($_SESSION['email'])) {
                         ?>
                         <?php
                         if (isset($_SESSION['email'])) {
-                            echo "<form method='POST' action='./includes/logout.inc.php'>
+                            echo "<form method='POST' action='../includes/logout.inc.php'>
                         <button type='submit' name='logout' class='bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded'>
                           Log Out
                         </button>

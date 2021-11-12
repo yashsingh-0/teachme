@@ -5,37 +5,28 @@ $conn = dbcon();
 if (isset($_SESSION['email'])) {
         
     $sql = "SELECT `email` FROM `admin_info` WHERE `email` = '$_SESSION[email]'";
-    $sqlps = "SELECT `email` FROM `user_info` WHERE `email` = '$_SESSION[email]'";
-    $sqlt = "SELECT `email` FROM `teachers_info` WHERE `email` = '$_SESSION[email]'";
-    $sqlpsr = mysqli_query($conn, $sqlps);
     $sqlr = mysqli_query($conn,$sql);
-    $sqlt = mysqli_query($conn,$sqlt);
-    $rowt = mysqli_num_rows($sqlt);
-    $rowsps = mysqli_num_rows($sqlpsr);
     $rows = mysqli_num_rows($sqlr);
-    if ($rows > 0) {
-        header("Location: ./admin-panel.php");
+    if ($rows <= 0) {
+        header("Location: ./admin-login.php");
         exit();
     }
-    else if ($rowsps > 0) {
-        header("Location: ../home.php?email=".$_SESSION['email']);
-        exit();
-    }
-    else if ($rowt > 0) {
-        header("Location: ./admin-teachers-panel.php?email=".$_SESSION['email']."&name=".$_SESSION['fullname']);
-        exit();
-    }
+}
+else {
+  header("Location: ./admin-login.php");
+  exit();
 }    
 ?>
+
 
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin's login</title>
+	<title>signup</title>
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 <!--navbar-->
@@ -108,20 +99,37 @@ if (isset($_SESSION['email'])) {
             </div>
         </div>
     </nav>
-    <!--form-->
-    <div class="flex max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl"style="margin-top: 10.5rem">
-        <div class="hidden bg-cover lg:block lg:w-1/2"><img class="object-cover w-full h-full" src="https://source.unsplash.com/user/erondu/1600x900"
-              alt="img" /></div>
-        
-        <div class="w-full px-6 py-8 md:px-8 lg:w-1/2">
-            <h2 class="text-2xl font-semibold text-center text-gray-700 dark:text-white">TEACH.ME</h2>
 
-            <p class="text-xl text-center text-gray-600 dark:text-gray-200">Welcome back Admin!</p>
- <!--ERROR HANDLING-->
+    <!--Signup form-->
+    <form action="./includes/admin_teachers_signup.inc.php" method="POST">
+    <div class="flex items-center min-h-screen bg-gray-50">
+      <div class="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
+        <div class="flex flex-col md:flex-row">
+          <div class="h-32 md:h-auto md:w-1/2">
+            <img class="object-cover w-full h-full" src="https://source.unsplash.com/user/erondu/1600x900"
+              alt="img" />
+          </div>
+          <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+            <div class="w-full">
+              <div class="flex justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 text-red-600" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                </svg>
+              </div>
+              <h1 class="mb-4 text-2xl font-bold text-center text-gray-700">
+
+                Add a Teacher
+              </h1>
+<!--ERROR HANDLING-->
 <span>
 <?php 
   if (isset($_GET['error'])) {
-    if ($_GET['error'] == "emptyfields") {
+    if ($_GET['error'] == "fieldsempty") {
       echo "
     <div class='flex w-full mt-2 max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800'>
         <div class='flex items-center justify-center w-12 bg-red-500'>
@@ -142,9 +150,9 @@ if (isset($_SESSION['email'])) {
 ?> 
 </span> 
 <span>
-<?php 
+<?php  
   if (isset($_GET['error'])) {
-    if ($_GET['error'] == "UserDoesNotExist") {
+    if ($_GET['error'] == "UserAlreadyExist") {
       echo "
     <div class='flex w-full mt-2 max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800'>
         <div class='flex items-center justify-center w-12 bg-red-500'>
@@ -156,18 +164,18 @@ if (isset($_SESSION['email'])) {
         <div class='px-4 py-2 -mx-3'>
             <div class='mx-3'>
                 <span class='font-semibold text-red-500 dark:text-red-400'>Error</span>
-                <p class='text-sm text-gray-600 dark:text-gray-200'>User Does Not Exist!</p>
+                <p class='text-sm text-gray-600 dark:text-gray-200'>Teacher Already Exist! Try <a class='text-blue-600 hover:underline' href='./admin-teachers-login.php'>Login.</a></p>
             </div>
         </div>
     </div>";
     }
   }
-?> 
+?>
 </span>
 <span>
-<?php 
+<?php  
   if (isset($_GET['error'])) {
-    if ($_GET['error'] == "wrongpassword") {
+    if ($_GET['error'] == "invalidemail") {
       echo "
     <div class='flex w-full mt-2 max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800'>
         <div class='flex items-center justify-center w-12 bg-red-500'>
@@ -179,42 +187,57 @@ if (isset($_SESSION['email'])) {
         <div class='px-4 py-2 -mx-3'>
             <div class='mx-3'>
                 <span class='font-semibold text-red-500 dark:text-red-400'>Error</span>
-                <p class='text-sm text-gray-600 dark:text-gray-200'>Wrong Password</p>
+                <p class='text-sm text-gray-600 dark:text-gray-200'>Invalid Email</p>
             </div>
         </div>
     </div>";
     }
   }
-?> 
+?>
 </span>
+              <div>
+                <label class="block text-sm">
+                  Name
+                </label>
+                <input type="text" name="fullname" 
+                  class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  placeholder="Name" />
+              </div>
+              <div class="mt-4">
+                <label class="block text-sm">
+                  Email
+                </label>
+                <input type="email" name="email" 
+                  class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  placeholder="Email Address" />
+                  </div>  
+              <div>
+                <label class="block text-sm">
+                  Subject
+                </label>
+                <input type="text" name="subject" 
+                  class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  placeholder="subjecct" />
+              </div>      
+              <div>
+                <label class="block mt-4 text-sm">
+                  Password
+                </label>
+                <input name="password" 
+                  class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  placeholder="Password" type="password" />
+              </div>
+
+              <button type="submit" name="submit" class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red">
+               Add Teacher+
+              </button>
 
 
-            
-            <form action="./includes/admin_login.inc.php" method="POST">
-            <div class="mt-4">
-                <label class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" for="LoggingEmailAddress">Email Address</label>
-                <input name="email" id="LoggingEmailAddress" class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" type="email">
             </div>
-
-            <div class="mt-4">
-                <div class="flex justify-between">
-                    <label class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" for="loggingPassword">Password</label>
-                    <a href="#" class="text-xs text-gray-500 dark:text-gray-300 hover:underline">Forget Password?</a>
-                </div>
-
-                <input name="password" id="loggingPassword" class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" type="password">
-            </div>
-
-            <div class="mt-8">
-                <button type="submit" name="login" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-red-700 rounded hover:bg-red-600 focus:outline-none focus:bg-gray-600">
-                    Login
-                </button>
-            </div>
-            </form>
-            <div class="flex items-center justify-between mt-4">
-                
-            </div>
+          </div>
         </div>
+      </div>
     </div>
+</form>
 </body>
 </html>

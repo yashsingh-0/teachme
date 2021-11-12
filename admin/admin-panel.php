@@ -1,9 +1,20 @@
 <?php
 include '../includes/session.inc.php';
 include '../includes/connection.inc.php';
-if (!isset($_SESSION['email'])) {
-    header("Location: ./admin-login.php");
+$conn = dbcon();
+if (isset($_SESSION['email'])) {
+    $sql = "SELECT `email` FROM `admin_info` WHERE `email` = '$_SESSION[email]'";
+    $sqlr = mysqli_query($conn,$sql);
+    $rows = mysqli_num_rows($sqlr);
+    if ($rows <= 0) {
+        header("Location: ./admin-login.php");
+        exit();
+    }
 }
+else {
+  header("Location: ./admin-login.php");
+  exit();
+}    
 ?>
 
 
@@ -29,7 +40,10 @@ if (!isset($_SESSION['email'])) {
 
     <!--Nav-->
     <nav class="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0">
-
+        <div class="flex items-center justify-between">
+                    <div>
+                        <a class="text-2xl font-bold text-white-800 text-white lg:text-3xl hover:text-white-700 dark:hover:text-gray-300" href="../index.php">TEACH.ME</a>
+                    </div>
         <div class="flex flex-wrap items-center">
             <div class="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
                 <a href="#">
@@ -37,16 +51,7 @@ if (!isset($_SESSION['email'])) {
                 </a>
             </div>
 
-            <div class="flex flex-1 md:w-1/3 justify-center md:justify-start text-white px-2">
-                <span class="relative w-full">
-                    <input type="search" placeholder="Search" class="w-full bg-gray-900 text-white transition border border-transparent focus:outline-none focus:border-gray-400 rounded py-3 px-2 pl-10 appearance-none leading-normal">
-                    <div class="absolute search-icon" style="top: 1rem; left: .8rem;">
-                        <svg class="fill-current pointer-events-none text-white w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
-                        </svg>
-                    </div>
-                </span>
-            </div>
+           
 
             <div class="flex w-full pt-2 content-center justify-between md:w-1/3 md:justify-end">
                 <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
@@ -101,23 +106,23 @@ if (!isset($_SESSION['email'])) {
             <div class="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
                 <ul class="list-reset flex flex-row md:flex-col py-0 md:py-3 px-1 md:px-2 text-center md:text-left">
                     <li class="mr-3 flex-1">
-                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
-                            <i class="fas fa-tasks pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Tasks</span>
+                        <a href="./admin-panel-teachers.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
+                            <i class="fas fa-tasks pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Teachers</span>
                         </a>
                     </li>
                     <li class="mr-3 flex-1">
-                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
-                            <i class="fa fa-envelope pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Messages</span>
+                        <a href="./admin-panel-users.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                            <i class="fa fa-envelope pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Users</span>
                         </a>
                     </li>
                     <li class="mr-3 flex-1">
-                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                        <a href="admin-panel.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
                             <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Analytics</span>
                         </a>
                     </li>
                     <li class="mr-3 flex-1">
-                        <a href="#" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
-                            <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Payments</span>
+                        <a href="./admin-panel-requests.php" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                            <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Requests</span>
                         </a>
                     </li>
                 </ul>

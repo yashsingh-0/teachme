@@ -1,3 +1,22 @@
+<?php
+include '../includes/session.inc.php';
+include '../includes/connection.inc.php';
+$conn = dbcon();
+if (isset($_SESSION['email'])) {
+        
+    $sql = "SELECT `email` FROM `admin_info` WHERE `email` = '$_SESSION[email]'";
+    $sqlr = mysqli_query($conn,$sql);
+    $rows = mysqli_num_rows($sqlr);
+    if ($rows <= 0) {
+        header("Location: ./admin-login.php");
+        exit();
+    }
+}
+else {
+  header("Location: ./admin-login.php");
+  exit();
+}    
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -143,7 +162,7 @@
         <div class='px-4 py-2 -mx-3'>
             <div class='mx-3'>
                 <span class='font-semibold text-red-500 dark:text-red-400'>Error</span>
-                <p class='text-sm text-gray-600 dark:text-gray-200'>User Already Exist! Try <a class='text-blue-600 hover:underline' href='./login.php'>Login.</a></p>
+                <p class='text-sm text-gray-600 dark:text-gray-200'>User Already Exist! Try <a class='text-blue-600 hover:underline' href='./admin-login.php'>Login.</a></p>
             </div>
         </div>
     </div>";

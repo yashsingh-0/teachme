@@ -1,3 +1,34 @@
+<?php
+include './includes/session.inc.php';
+include './includes/connection.inc.php';
+$conn = dbcon();
+if (isset($_SESSION['email'])) {
+        
+    $sql = "SELECT `email` FROM `admin_info` WHERE `email` = '$_SESSION[email]'";
+    $sqlps = "SELECT `email` FROM `user_info` WHERE `email` = '$_SESSION[email]'";
+    $sqlt = "SELECT `email` FROM `teachers_info` WHERE `email` = '$_SESSION[email]'";
+    $sqlpsr = mysqli_query($conn, $sqlps);
+    $sqlr = mysqli_query($conn,$sql);
+    $sqlt = mysqli_query($conn,$sqlt);
+    $rowt = mysqli_num_rows($sqlt);
+    $rowsps = mysqli_num_rows($sqlpsr);
+    $rows = mysqli_num_rows($sqlr);
+    if ($rows > 0) {
+        header("Location: ./admin/admin-panel.php");
+        exit();
+    }
+    else if ($rowsps > 0) {
+        header("Location: ./home.php?email=".$_SESSION['email']);
+        exit();
+    }
+    else if ($rowt > 0) {
+        header("Location: ./admin/admin-teachers-panel.php?email=".$_SESSION['email']."&name=".$_SESSION['fullname']);
+        exit();
+    }
+ }   
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>

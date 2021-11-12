@@ -4,7 +4,6 @@ if (isset($_POST['submit'])) {
  $conn=dbcon();
  $fullname = $_POST['fullname'];
  $email = $_POST['email'];
- $occupation = $_POST['occupation'];
  $password = $_POST['password'];
  $query = "SELECT `email` FROM `admin_info` WHERE `email`='$email'";
  $queryresult = mysqli_query($conn, $query);

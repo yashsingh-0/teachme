@@ -3,7 +3,8 @@ include '../includes/session.inc.php';
 include '../includes/connection.inc.php';
 $conn = dbcon();
 if (isset($_SESSION['email'])) {
-        
+    # code...
+
     $sql = "SELECT `email` FROM `admin_info` WHERE `email` = '$_SESSION[email]'";
     $sqlps = "SELECT `email` FROM `user_info` WHERE `email` = '$_SESSION[email]'";
     $sqlt = "SELECT `email` FROM `teachers_info` WHERE `email` = '$_SESSION[email]'";
@@ -25,9 +26,8 @@ if (isset($_SESSION['email'])) {
         header("Location: ./admin-teachers-panel.php?email=".$_SESSION['email']."&name=".$_SESSION['fullname']);
         exit();
     }
-}    
+  }  
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +35,7 @@ if (isset($_SESSION['email'])) {
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin's login</title>
+	<title>Teacher's login</title>
 </head>
 <body>
 <!--navbar-->
@@ -116,7 +116,7 @@ if (isset($_SESSION['email'])) {
         <div class="w-full px-6 py-8 md:px-8 lg:w-1/2">
             <h2 class="text-2xl font-semibold text-center text-gray-700 dark:text-white">TEACH.ME</h2>
 
-            <p class="text-xl text-center text-gray-600 dark:text-gray-200">Welcome back Admin!</p>
+            <p class="text-xl text-center text-gray-600 dark:text-gray-200">Welcome back Teacher!</p>
  <!--ERROR HANDLING-->
 <span>
 <?php 
@@ -186,11 +186,8 @@ if (isset($_SESSION['email'])) {
     }
   }
 ?> 
-</span>
-
-
-            
-            <form action="./includes/admin_login.inc.php" method="POST">
+</span>           
+            <form action="./includes/admin_teachers_login.inc.php" method="POST">
             <div class="mt-4">
                 <label class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" for="LoggingEmailAddress">Email Address</label>
                 <input name="email" id="LoggingEmailAddress" class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" type="email">

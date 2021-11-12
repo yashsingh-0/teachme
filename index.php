@@ -63,23 +63,12 @@ include './includes/connection.inc.php';
                     Dimension of reality that makes change possible and understandable. An indefinite and homogeneous environment in which natural events and human existence take place.
                 </p>
                 <div class="flex mt-8">
-                <?php 
-                if (!isset($_SESSION['email'])) {
-                  echo "<a href='signup.php' class='uppercase py-2 px-4 rounded-lg bg-red-500 border-2 border-transparent text-white text-md mr-4 hover:bg-red-400'>
+                  <a href='signup.php' class='uppercase py-2 px-4 rounded-lg bg-red-500 border-2 border-transparent text-white text-md mr-4 hover:bg-red-400'>
                         Sign Up
                     </a>
                     <a href='login.php' class='uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-red-500 text-red-500 dark:text-white hover:bg-red-500 hover:text-white text-md'>
                         Log In
-                    </a>";
-                } else {
-                   echo "<a href='home.php' class='uppercase py-2 px-4 rounded-lg bg-red-500 border-2 border-transparent text-white text-md mr-4 hover:bg-red-400'>
-                        Sign Up
                     </a>
-                    <a href='home.php' class='uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-red-500 text-red-500 dark:text-white hover:bg-red-500 hover:text-white text-md'>
-                        Log In
-                    </a>";
-                }
-                ?>
                 </div>
             </div>
             <div class="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
@@ -92,7 +81,7 @@ include './includes/connection.inc.php';
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-col text-center w-full mb-20">
       <h2 class="text-xs text-red-500 tracking-widest font-medium title-font mb-1">ROOF PARTY POLAROID</h2>
-      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Master Cleanse Reliac Heirloom</h1>
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Best Class Education</h1>
       <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
     </div>
   </div></main>
@@ -158,8 +147,8 @@ include './includes/connection.inc.php';
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-col text-center w-full mb-20">
-      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Master Cleanse Reliac Heirloom</h1>
-      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Get Best Class Education Here</h1>
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Blue tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
     </div>
     <div class="flex flex-wrap -m-4 text-center">
       <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
