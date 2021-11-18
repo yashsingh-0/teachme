@@ -7,12 +7,12 @@ if (isset($_SESSION['email'])) {
     $sqlr = mysqli_query($conn,$sql);
     $rows = mysqli_num_rows($sqlr);
     if ($rows <= 0) {
-        header("Location: ./user-login.php");
+        header("Location: ./login.php");
         exit();
     }
 }
 else {
-  header("Location: ./user-login.php");
+  header("Location: ./login.php");
   exit();
 }    
 ?>

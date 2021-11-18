@@ -104,7 +104,7 @@ if (isset($_GET['query']) && isset($_GET['results'])) {
 			        <th class='px-2 py-6'></th>
 			        <th class='text-sm text-gray-700'>Mobile</th>
 			        <th class='hidden md:table-cell  text-sm text-gray-700'>Mail</th>
-			        <th class='hidden md:table-cell text-sm text-gray-700'>FOLLOW</th>
+			        <th class='hidden md:table-cell text-sm text-gray-700'>View Profile</th>
 			        </th>
 		      	</tr>
 			</thead>
@@ -137,7 +137,9 @@ if (isset($_GET['query']) && isset($_GET['results'])) {
 			        </td>
 			        <td>
 			          <button class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full'>
-  						Follow
+                      <a href=profile.php?email=$array[email]&name=$array[name]>
+  						View Profile
+                        </a>
 					</button>
 			        </td>
 		      	</tr>	
